@@ -45,9 +45,19 @@ def build_query_result(card):
     else:
         return None
 
-    gatherer_button = InlineKeyboardButton("Gatherer", url=card['related_uris']['gatherer'])
-    cardmarket_button = InlineKeyboardButton("CardMarket", url=card['purchase_uris']['cardmarket'])
-    markup = InlineKeyboardMarkup([[gatherer_button, cardmarket_button]])
+    buttons = []
+    if 'related_uris' in card and 'gatherer' in card['related_uris']:
+        gatherer_button = InlineKeyboardButton("Gatherer", url=card['related_uris']['gatherer'])
+        buttons.append(gatherer_button)
+
+    if 'purchase_uris' in card and 'cardmarket' in card['purchase_uris']:
+        cardmarket_button = InlineKeyboardButton("CardMarket", url=card['purchase_uris']['cardmarket'])
+        buttons.append(cardmarket_button)
+
+    if not buttons:
+        buttons = [InlineKeyboardButton("Ask Urza", url='http://AskUrza.com')]
+
+    markup = InlineKeyboardMarkup([buttons])
     return InlineQueryResultPhoto(id=uuid4(),
                                   title=card['name'],
                                   thumb_url=thumb,
