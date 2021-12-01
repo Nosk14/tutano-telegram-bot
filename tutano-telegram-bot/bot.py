@@ -1,8 +1,7 @@
 import logging
 import os
 from uuid import uuid4
-from telegram import InlineQueryResultPhoto, InlineQueryResultArticle, InputTextMessageContent, InlineKeyboardButton, \
-    InlineKeyboardMarkup
+from telegram import InlineQueryResultPhoto, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import Updater, InlineQueryHandler
 import requests
 from time import time, sleep
